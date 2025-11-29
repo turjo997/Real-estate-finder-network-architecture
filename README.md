@@ -1,3 +1,4 @@
+<img src="images/real-estate-finder.png" alt="Logo" width="1800"/>
 
 # Real Estate Finder - Network Architecture
 
@@ -91,7 +92,7 @@ Developers should be able to securely access internal services, databases, and i
 - #### Public Subnets
   Subnet is by default private but when we add internet gateway it becomes public. Kept web server, NAT, LB's in public subnet so that it can directly talk to the internet using IGW. 
 - #### Private Subnets
-  Used to protect backend services from direct internet access and reduces malacious attacks. Kept app server and DB's in private subnets.
+  Used to protect backend services from direct internet access and reduces malacious attacks. Kept app server and DB's in private subnets. Instances in private subnets can not talk to each other. But it can be possible using NAT. NAT can talk to internet on behalf of these EC2 instances. EC2 will send traffic to the NAT. NAT will route traffic to the internet, will take the traffic back and send the packet to the EC2 instances.
 
 - #### Load Balancers(LB)
   Used LB to give application a single public entry point, distribute traffic across multiple servers, remove unhealthy instances automatically, and keep the system online even if a server or availability zone fails.
