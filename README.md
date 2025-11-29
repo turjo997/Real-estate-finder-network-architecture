@@ -4,7 +4,18 @@
 
 A network architecture for a platform that will serve as a real estate finder. People will come and search for houses, bid on them, chat with the buyer/seller. The platform will fetch data from many 3rd party services for different countries and cities.
 
-## Assumptions
+---
+## Table of Contents
+
+- [Chapter 1: Assumptions](#chapter-1-assumptions)
+- [Chapter 2: Project Details](#chapter-2-project-details)
+- [Chapter 3: Architecture Decisions](#chapter-3-architecture-decisions)
+- [Chapter 4: Reasoning and Networking Components](#chapter-4-reasoning-and-networking-components)
+- [Chapter 5: Use Cases](#chapter-5-use-cases)
+
+---
+
+## Chapter 1: Assumptions
 
 ### 1. High availability is mandatory
 The platform must survive the failure of a single Availability Zone or even an entire Region.
@@ -37,7 +48,7 @@ Load balancers must distribute traffic across EC2 instances automatically.
 ### 10. Security boundaries must be strict
 Public resources are only for load balancing and NAT and everything else stays in private subnets.
 
-## Project Details
+## Chapter 2: Project Details
 
 Here I have designed a network architecture for a platform that will serve as a real estate finder.
 
@@ -47,7 +58,7 @@ The network must serve traffic from multiple countries, maintain low latency, an
 
 Developers should be able to securely access internal services, databases, and integration endpoints through VPN without exposing internal resources publicly. Security, scalability, and clean separation between public and private layers are mandatory.
 
-## Architecture Decisions
+## Chapter 3: Architecture Decisions
 
 #### 1. Why multi regions and availability zones
 
@@ -61,7 +72,7 @@ Developers should be able to securely access internal services, databases, and i
 
 #### 6. Why client-to-site and server-to-site vpn needed
 
-## Reasoning and Networking Components
+## Chapter 4: Reasoning and Networking Components
 - VPC per region
 - 2 Regions & 2 Availabity Zones
 - 1 public subnet & 2 private subnets in each AZ
@@ -76,7 +87,7 @@ Developers should be able to securely access internal services, databases, and i
 - Site - to - Site VPN in each region
 - Office router (customer GW) in each region
   
-## Use Case
+## Chapter 5: Use Cases
 - #### VPC   
    Used to create a logically isolated, secure virtual network within the cloud for launching AWS resources
 
