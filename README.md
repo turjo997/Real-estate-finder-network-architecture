@@ -36,3 +36,26 @@ Load balancers must distribute traffic across EC2 instances automatically.
 ### 10. Security boundaries must be strict
 Public resources are only for load balancing and NAT and everything else stays in private subnets.
 
+## Project Details
+
+Here I have designed a network architecture for a platform that will serve as a real estate finder.
+
+The real-estate platform lets users search properties, bid on listings, and chat with buyers and sellers. The system also pulls external data from multiple third-party services (property data, maps, taxation, regional data APIs).
+
+The network must serve traffic from multiple countries, maintain low latency, and offer High Availability across two AWS regions, each with two Availability Zones.
+
+Developers should be able to securely access internal services, databases, and integration endpoints through VPN without exposing internal resources publicly. Security, scalability, and clean separation between public and private layers are mandatory.
+
+## Architecture Decisions
+
+### 1. Why multi regions and availability zones
+
+### 2. Why public subnets for Web APP
+
+### 3. Why private subnets for APP/DB
+
+### 4. Why NAT vs Direct Internet
+
+### 5. Why Load Balancer 
+
+### 6. Why client-to-site and server-to-site vpn needed
