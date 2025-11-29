@@ -48,14 +48,70 @@ Developers should be able to securely access internal services, databases, and i
 
 ## Architecture Decisions
 
-### 1. Why multi regions and availability zones
+#### 1. Why multi regions and availability zones
 
-### 2. Why public subnets for Web APP
+#### 2. Why public subnets for Web APP
 
-### 3. Why private subnets for APP/DB
+#### 3. Why private subnets for APP/DB
 
-### 4. Why NAT vs Direct Internet
+#### 4. Why NAT vs Direct Internet
 
-### 5. Why Load Balancer 
+#### 5. Why Load Balancer 
 
-### 6. Why client-to-site and server-to-site vpn needed
+#### 6. Why client-to-site and server-to-site vpn needed
+
+## Reasoning and Networking Components
+- VPC per region
+- 2 Regions & 2 Availabity Zones
+- 1 public subnet & 2 private subnets in each AZ
+- 2 Load Balancer(LB) for auto scaling in each reigion
+- 1 primary DB and 1 stand-by (backup) DB for replication in each egion
+- Web EC2 instances (resides in public subnet)
+- App EC2 instances (resides in private subnet)
+- NAT (resides in public subnet)
+- Internet Gateway in each reigion
+- Route 53 (DNS) in each region
+- Client - to - Site VPN in each region
+- Site - to - Site VPN in each region
+- Office router (customer GW) in each region
+  
+## Use Case
+- #### VPC   
+   Used to create a logically isolated, secure virtual network within the cloud for launching AWS resources
+
+- #### Route 53 (DNS)
+   Used for its highly available and scalable Domain Name System (DNS) service, which translates domain names into IP addresses, registers domains, and routes internet traffic to applications.
+
+- #### Regions
+  Used for disaster recovery, global reach, or regulatory compliance.
+    
+- #### Availabity Zones
+  Used multiple AZs (within one region) for high availability and low-latency failover.
+
+- #### Public Subnets
+  Subnet is by default private but when we add internet gateway it becomes public. Kept web server, NAT, LB's in public subnet so that it can directly talk to the internet using IGW. 
+- #### Private Subnets
+  Used to protect backend services from direct internet access and reduces malacious attacks. Kept app server and DB's in private subnets.
+
+- #### Load Balancers(LB)
+  Used LB to give application a single public entry point, distribute traffic across multiple servers, remove unhealthy instances automatically, and keep the system online even if a server or availability zone fails.
+
+- #### Primary DB and stand-by (backup) DB
+  Used primary DB to handle all live reads and writes. And standby DB is a synced replica that stays ready to take over if the primary fails. This setup keeps the database available during outages and prevents data loss.
+
+- #### Web Server EC2 instances
+  Used to deploy web app EC2 instances in public subnet. 
+- #### App Server EC2 instances
+  Used to deploy app EC2 instances in private subnet.
+- #### NAT
+  Used for private subnets make outbound internet calls.
+- #### Internet Gateway
+  Used so that it allows public subnets to reach the internet.
+- #### Client - to - Site VPN
+  Secure access for developers.
+
+- #### Site - to - Site VPN
+  Used for internal communication on premise data centers, office networks to aws vpc. 
+
+- #### Office router (customer GW)
+  Resides in the on premise data centers/office netwroks to communicate with the aws vpc.
