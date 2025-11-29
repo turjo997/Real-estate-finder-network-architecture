@@ -1,5 +1,8 @@
 <img src="images/real-estate-finder.png" alt="Logo" width="1800"/>
-<img src="images/subnet.png" alt="Logo" width="1800"/>
+<p align="center">
+  <img src="images/subnet.png" alt="Logo" width="600"/>
+</p>
+
 
 # Real Estate Finder - Network Architecture
 
